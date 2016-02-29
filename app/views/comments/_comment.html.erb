@@ -1,0 +1,3 @@
+<p><em><%= comment.content %></em></p>
+<%= link_to "Destroy", post_comment_path(@post, comment), method: :delete, class: "btn btn-default" if current_user == comment.user  %> 
+<p>by <strong><%= comment.user.email %></strong></p>
