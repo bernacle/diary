@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
   before_action :find_posts, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @posts = Post.all.order("created_at DESC")
   end
 
   def show
-    #code
+
   end
 
   def new
@@ -17,7 +18,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       redirect_to @post
+      flash[:success] = "Post successfully created!"
     else
+      flash[:error] = "Post was not created, some error occurred"
       render 'new'
     end
   end
@@ -28,9 +31,11 @@ class PostsController < ApplicationController
 
   def update
     @post.update(post_params)
-    if @post.save
+    if @post.save && current_user == @post.user
       redirect_to @post
+      flash[:success] = "Post successfully updated!"
     else
+      flash[:error] = "Post was not updated, some error occurred"
       render 'edit'
     end
   end
@@ -38,6 +43,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to root_path
+    flash[:success] = "Post successfully deleted!"
   end
 
   private
@@ -46,6 +52,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, :image)
     end
 end

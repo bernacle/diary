@@ -1,4 +1,4 @@
 <% @posts.each do |post| %>
   <h3><%= link_to post.title, post %></h3>
-  <p><%= post.content %></p>
+  <p><%= truncate(post.content, length: 100)%></p>
 <% end %>
