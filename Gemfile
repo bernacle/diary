@@ -25,6 +25,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'paperclip', '~> 4.3', '>= 4.3.5'
 gem 'devise', '~> 3.5', '>= 3.5.6'
+gem 'devise-authy' #adds the two factor authentication
+gem 'envyable', '~> 1.0'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
